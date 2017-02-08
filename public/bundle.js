@@ -9080,6 +9080,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(35);
 
+var _utils = __webpack_require__(146);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9113,7 +9115,7 @@ var Artists = function (_Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'list-group' },
-					artists.map(function (artist) {
+					(0, _utils.sortArtists)(artists).map(function (artist) {
 						return _react2.default.createElement(
 							'div',
 							{ className: 'list-group-item', key: artist.id },
@@ -9419,6 +9421,8 @@ Object.defineProperty(exports, "__esModule", {
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _utils = __webpack_require__(146);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14446,6 +14450,36 @@ exports.default = initialState;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+// this works
+var sortArtists = exports.sortArtists = function sortArtists(artists) {
+  var sorted = artists.sort(function (a, b) {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (b.name.toLowerCase() < a.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  });
+
+  return sorted;
+};
+
+// this doesn't for some reason
+var sortAlbums = exports.sortAlbums = function sortAlbums(albums) {
+  var sorted = albums.sort(function (a, b) {
+    if (a.artists[0].name.toLowerCase() < b.artists[0].name.toLowerCase()) {
+      return -1;
+    }
+    if (b.artists[0].name.toLowerCase() < a.artists[0].name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  });
+
+  return sorted;
+};
+
 var convertSong = exports.convertSong = function convertSong(song) {
   song.audioUrl = "/api/songs/" + song.id + "/audio";
   return song;

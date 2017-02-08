@@ -1,3 +1,33 @@
+// this works
+export const sortArtists = (artists) => {
+  const sorted = artists.sort((a,b) => {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (b.name.toLowerCase() < a.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  });
+  
+  return sorted;
+};
+
+// this doesn't for some reason
+export const sortAlbums = (albums) => {
+  const sorted = albums.sort((a,b) => {
+    if (a.artists[0].name.toLowerCase() < b.artists[0].name.toLowerCase()) {
+      return -1;
+    }
+    if (b.artists[0].name.toLowerCase() < a.artists[0].name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  });
+  
+  return sorted;
+};
+
 export const convertSong = (song) => {
   song.audioUrl = `/api/songs/${song.id}/audio`;
   return song;
